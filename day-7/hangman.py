@@ -71,6 +71,8 @@ def replace_character(word, char, idx):
 
 words = ['mango', 'banana', 'guava', 'jackfruit', 'apple', 'orange', 'watermelon']
 
+
+# Randomly choosing a word
 word = random.choice(words)
 word_cpy = word
 length = len(word)
