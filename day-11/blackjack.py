@@ -72,19 +72,27 @@ while restart:
     computers_score = 0
     for card in computer_cards:
         computers_score+=cards_dict[card]
-
+    user_black_jack = False
     while True:
         if is_blackjack(your_cards, your_score):
-            print('Your Blackjack!!') 
-        choice = input('Type "y" to get another card, type "n" to pass: ').lower()
+            print('Your Blackjack!!')
+            user_black_jack = True
+            choice = 'n'
+        else:
+            choice = input('Type "y" to get another card, type "n" to pass: ').lower()
         if choice == 'n':
             print_score(your_cards, your_score, computer_cards)
             while computers_score<17:
-                if is_blackjack(computer_cards, computers_score):
-                    print("Computer's Blackjack!!") 
                 next_card = random.choice(cards)
                 computer_cards.append(next_card)
                 computers_score = add_score('computer', computers_score, next_card)
+                if is_blackjack(computer_cards, computers_score):
+                    print("Computer's Blackjack!!")
+                    if user_black_jack:
+                        computers_score = 21
+                        your_score = 21
+                    else:
+                        your_score = 0
             print_final_hand(your_cards, your_score, computer_cards, computers_score)
             print_result(your_score, computers_score)
             break
@@ -94,12 +102,12 @@ while restart:
             your_cards.append(your_next)
             your_score = add_score('player', your_score, your_next)
             print_score(your_cards, your_score, computer_cards)
-            computer_next = random.choice(cards)
-            computer_cards.append(computer_next)
-            computers_score = add_score('computer', computers_score, computer_next)
             if your_score > 21:
-                print_result(your_score, computers_score)
+                computer_next = random.choice(cards)
+                computer_cards.append(computer_next)
+                computers_score = add_score('computer', computers_score, computer_next)
                 print_final_hand(your_cards, your_score, computer_cards, computers_score)
+                print_result(your_score, computers_score)
                 break
         else:
             print('Invalid choice')
