@@ -167,3 +167,5 @@ while True:
 
         buy(coins, coffee_type)
 
+
+        
