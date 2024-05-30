@@ -16,6 +16,7 @@ def dot_and_move():
 
 tim = Turtle()
 tim.penup()
+tim.hideturtle()
 tim.goto(-300, -300)
 for _ in range(10):
     for _ in range(10):
