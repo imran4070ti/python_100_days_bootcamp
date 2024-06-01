@@ -30,6 +30,9 @@ class Snake:
     def get_last_pos(self):
         return self.segments[-1].pos()
     
+    def get_first_pos(self):
+        return self.segments[0].pos()
+    
     def get_heading(self):
         return self.segments[0].heading()
 

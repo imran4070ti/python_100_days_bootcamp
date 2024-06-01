@@ -1,6 +1,8 @@
 from turtle import Screen
 import time
 from snake import Snake
+from food import Food
+from scoreboard import ScoreBoard
 
 
 screen = Screen()
@@ -11,6 +13,10 @@ screen.title('My Snake Game')
 screen.listen()
 
 snake = Snake()
+food = Food()
+food.refresh()
+scoreboard = ScoreBoard()
+scoreboard.display_score()
 
 screen.onkey(snake.turn_left, 'Left')
 screen.onkey(snake.turn_up, 'Up')
@@ -26,7 +32,21 @@ while game_is_on:
     time.sleep(.1)
     snake.move()
 
-        
+    # Detect collision using pos() method
+    snake_x, snake_y = snake.get_first_pos()
+    food_x, food_y = food.pos()
+    if abs(snake_x - food_x) <= 15 and abs(snake_y - food_y) <= 15:
+        food.refresh()
+        snake.add_segment()
+        scoreboard.update_score()
+        scoreboard.refresh_scoreboard()
+    
+    if snake_x > 280 or snake_x < -280 or snake_y > 280 or snake_y <-280:
+        game_is_on = False
+        scoreboard.game_over()
+
+    
 
 
+    
 screen.exitonclick()
