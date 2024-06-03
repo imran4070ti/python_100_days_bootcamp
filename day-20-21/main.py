@@ -3,6 +3,8 @@ import time
 from snake import Snake
 from food import Food
 from scoreboard import ScoreBoard
+import math
+
 
 
 screen = Screen()
@@ -41,9 +43,17 @@ while game_is_on:
         scoreboard.update_score()
         scoreboard.refresh_scoreboard()
     
-    if snake_x > 280 or snake_x < -280 or snake_y > 280 or snake_y <-280:
+    if snake_x > 280 or snake_x < -280 or snake_y > 280 or snake_y <-280 :
         game_is_on = False
         scoreboard.game_over()
+    for segment in snake.segments[1:]:
+        if snake.head().distance(segment) < 10:
+            print('colided')
+            scoreboard.game_over()
+
+
+    
+    
 
     
 

@@ -67,5 +67,11 @@ class Snake:
         if self.get_heading() != UP:
             self.segments[0].setheading(DOWN)
 
+    def head(self):
+        return self.segments[0]
+
+    
+
+
 
 
