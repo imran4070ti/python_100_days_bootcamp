@@ -1,30 +1,30 @@
 from turtle import Turtle
 
-LEFT_POSITIONS = (-390, 20)
-RIGHT_POSITIONS = (390, 0)
-
 class Paddle(Turtle):
 
-    def __init__(self, shape: str = "classic", undobuffersize: int = 1000, visible: bool = True) -> None:
-        super().__init__(shape, undobuffersize, visible)
-        self.paddle1 = Turtle('square')
-        self.paddle1.penup()
-        self.paddle1.color('white')
-        self.paddle1.shapesize(stretch_wid=5, stretch_len=1)
-        self.paddle1.goto(LEFT_POSITIONS)
+    def __init__(self, position=(0, 0)):
+        super().__init__()
+        self.paddle = Turtle('square')
+        self.paddle.penup()
+        self.paddle.color('white')
+        self.paddle.shapesize(stretch_wid=5, stretch_len=1)
+        self.paddle.goto(position)
+
+    def get_pos(self):
+        return self.paddle.pos()
 
     def move_up(self):
-        x, y = self.paddle1.pos()
+        x, y = self.paddle.pos()
         if y > 300:
-            self.paddle1.goto(x, y)
+            self.paddle.goto(x, y)
         else:
-            self.paddle1.goto(x, y+20)
+            self.paddle.goto(x, y+20)
 
     def move_down(self):
-        x, y = self.paddle1.pos()
+        x, y = self.paddle.pos()
         if y < -300:
-            self.paddle1.goto(x, y)
+            self.paddle.goto(x, y)
         else:
-            self.paddle1.goto(x, y-20)
+            self.paddle.goto(x, y-20)
         
         
