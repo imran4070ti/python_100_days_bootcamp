@@ -8,16 +8,17 @@ class Ball(Turtle):
         self.ball = Turtle('circle')
         self.ball.penup()
         self.ball.color('white')
-        self.ball.setheading(180)
+        self.move_x = 10
+        self.move_y = 10
+        self.speed = .1
 
     def get_pos(self):
         return self.ball.pos()
 
     def move(self):
-        self.ball.forward(10)
-
-    def paddle_collide(self):
         cur_x, cur_y = self.ball.pos()
+        self.ball.goto(cur_x+self.move_x, cur_y+self.move_y)
+
 
     def horizontal_collide(self):
         cur_x, cur_y = self.ball.pos()
@@ -25,19 +26,28 @@ class Ball(Turtle):
             return True
         return False
     
-    def vertical_collide(self):
+    def left_collide(self):
         cur_x, cur_y = self.ball.pos()
-        if cur_x <= -400 or cur_x>=400:
+        if cur_x<=-400:
             return True
         return False
     
-    def change_direction(self):
-        cur_head = self.ball.heading()
-        if cur_head == 180.0:
-            new_head = 0
-        elif cur_head == 0.0:
-            new_head = 180
-        else:
-            new_head = abs(360 - cur_head)
-        self.ball.setheading(new_head)
+    
+    def right_collide(self):
+        cur_x, cur_y = self.ball.pos()
+        if cur_x>=400:
+            return True
+        return False
+    
+    def bounce_y(self):
+        self.move_y *=-1
+
+    def bounce_x(self):
+        self.move_x *=-1
+        self.speed *= 0.9
+
+    def reset_position(self):
+        self.speed = 0.1
+        self.ball.goto((0, 0))
+        self.bounce_x()
 
