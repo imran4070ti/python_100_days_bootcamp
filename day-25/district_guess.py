@@ -1,8 +1,10 @@
 import pandas as pd
-from turtle import Turtle, Screen
+from turtle import Screen
 import turtle
+from district_point import DistrictPoint
+from district_df import DistrictDF
 
-bg_img = 'day-25/Bangladesh_districts.gif'
+bg_img = 'day-25/utils/bd_district_map.gif'
 
 screen = Screen()
 screen.title('Bangladesh District Guessing Game')
@@ -11,15 +13,28 @@ turtle.shape(bg_img)
 
 screen.bgpic(bg_img)
 
-def get_mouse_click_coor(x, y):
-    print(x, y)
 
-turtle.onscreenclick(get_mouse_click_coor)
-turtle.mainloop()
+district_points = []
+district_df = DistrictDF()
+
+game_is_on = True
+
+while game_is_on:
+    district_name = turtle.textinput('Input district name', 'name')
+    if district_df.is_found(district_name):
+        (x, y) = district_df.get_xy(district_name)
+        DistrictPoint((x, y), district_name)
+
+screen.exitonclick()
 
 
-# screen.exitonclick()
 
 
-# df = pd.read_csv('day-25/districts.csv')
-# df = df.drop(columns=['sl', 'div_id', 'district_bn', 'website'])
+
+
+
+# def get_mouse_click_coor(x, y):
+#     print(x, y)
+
+# turtle.onscreenclick(get_mouse_click_coor)
+# turtle.mainloop()
