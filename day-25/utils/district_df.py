@@ -3,6 +3,7 @@ import pandas as pd
 class DistrictDF:
     def __init__(self):
         self.district_df = pd.read_csv('day-25/utils/bd_districts.csv')
+        self.district_df['district'] = self.district_df['district'].str.lower()
 
     def is_found(self, district_name):
         if district_name in self.district_df['district'].values:

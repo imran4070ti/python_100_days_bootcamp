@@ -13,3 +13,4 @@ class DistrictPoint(Turtle):
         self.penup()
         self.goto(posistion)
         self.write(f'{district_name}', align='center', font=FONT)
+    
